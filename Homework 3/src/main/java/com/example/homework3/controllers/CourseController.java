@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,5 +25,14 @@ public class CourseController {
     @GetMapping("/courses")
     public ResponseEntity<List<Course>> getAllCourses() {
         return new ResponseEntity<>(cs.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/courses")
+    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
+        return new ResponseEntity<>((Course) cs.save(course),HttpStatus.OK);
+    }
+
+    public ICourseService getCourseService() {
+        return cs;
     }
 }

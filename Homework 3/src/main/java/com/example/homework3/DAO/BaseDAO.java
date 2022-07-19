@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface BaseDAO<T> {
     List<T> findAll();
-    T findByID(int id);
+    T findByID(Long id);
     T save(T object);
-    void deleteByID(int id);
+    void deleteByID(Long id);
     T update(T object);
 }

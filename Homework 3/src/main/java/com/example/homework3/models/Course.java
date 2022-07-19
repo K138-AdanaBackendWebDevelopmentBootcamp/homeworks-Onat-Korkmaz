@@ -5,10 +5,11 @@ import java.util.List;
 
 @Entity
 public class Course {
+
     @Id
-    @GeneratedValue(generator = "course", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "course", sequenceName = "COURSE_SEQ_ID")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private int code;
     private int creditScore;
@@ -76,7 +77,7 @@ public class Course {
         this.instructor = instructor;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }
