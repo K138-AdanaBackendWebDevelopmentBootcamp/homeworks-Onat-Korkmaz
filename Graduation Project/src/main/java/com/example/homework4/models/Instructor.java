@@ -1,7 +1,7 @@
 package com.example.homework4.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,4 +19,6 @@ public abstract class Instructor {
     private String phoneNo;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "instructor")
     private List<Course> courses;
+    @Setter(AccessLevel.PROTECTED) //direkt olarak salary'i değiştirmelerini istemiyoruz, o yüzden sadece alt sınıflarda görünür olmalı.
+    private double salary; // buraya state ekledim ki ücretlendirmede sıralama yaptırmamız için verimiz olsun
 }

@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Homework 3" />
+        <module name="Homework3" />
         <module name="Homework4" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Graduation Project" target="1.8" />
       <module name="Homework 3" target="1.8" />
+      <module name="Homework3" target="1.8" />
       <module name="Homework4" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -20,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Graduation Project" options="-parameters" />
       <module name="Homework 3" options="-parameters" />
+      <module name="Homework3" options="-parameters" />
       <module name="Homework4" options="-parameters" />
     </option>
   </component>

@@ -1,6 +1,7 @@
 package com.example.homework4.services;
 
 import com.example.homework4.models.Instructor;
+import com.example.homework4.models.PermanentInstructor;
 import com.example.homework4.repositories.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,15 @@ public class InstructorService {
         return ir.findByName(name);
     }
 
+    @Transactional
     public void deleteByName(String name) {
-        ir.deleteByName(name);
+        ir.deleteInstructorByName(name);
+    }
+
+    public List<Instructor> topThreeSalaryInstructor(){
+        Iterable<Instructor> instructors = ir.findTop3ByOrderBySalaryDesc();
+        List<Instructor> topThree = new ArrayList<>();
+        instructors.forEach(topThree::add);
+        return topThree;
     }
 }
