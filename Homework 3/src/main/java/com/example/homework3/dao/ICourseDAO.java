@@ -1,4 +1,4 @@
-package com.example.homework3.DAO;
+package com.example.homework3.dao;
 
 import org.springframework.stereotype.Repository;
 

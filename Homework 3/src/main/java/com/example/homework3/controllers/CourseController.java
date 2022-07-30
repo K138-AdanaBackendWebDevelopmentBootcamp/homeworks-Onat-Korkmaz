@@ -31,8 +31,4 @@ public class CourseController {
     public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
         return new ResponseEntity<>((Course) cs.save(course),HttpStatus.OK);
     }
-
-    public ICourseService getCourseService() {
-        return cs;
-    }
 }

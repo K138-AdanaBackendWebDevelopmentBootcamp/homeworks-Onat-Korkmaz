@@ -31,12 +31,6 @@ public class Course {
     public Course() {
     }
 
-    public Course(String name, int code, int creditScore) {
-        this.name = name;
-        this.code = code;
-        this.creditScore = creditScore;
-    }
-
     public String getName() {
         return name;
     }

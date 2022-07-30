@@ -1,7 +1,8 @@
 package com.example.homework3.services;
 
-import com.example.homework3.DAO.ICourseDAO;
+import com.example.homework3.dao.ICourseDAO;
 import com.example.homework3.models.Course;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class CourseService implements ICourseService<Course>{
 
     ICourseDAO cd;
 
-    public CourseService(ICourseDAO cd) {
+    public CourseService(@Qualifier("courseDAO") ICourseDAO cd) {
         this.cd = cd;
     }
 
@@ -27,7 +28,7 @@ public class CourseService implements ICourseService<Course>{
 
     @Override
     public Course save(Course course) {
-        return null;
+        return (Course) cd.save(course);
     }
 
     @Override

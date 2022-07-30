@@ -1,25 +1,25 @@
-package com.example.homework3.DAO;
+package com.example.homework3.dao;
 
 import com.example.homework3.models.Course;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class CourseDAO implements ICourseDAO<Course> {
+public class CourseDAOHibernate implements ICourseDAO<Course> {
 
     EntityManager em;
 
-    @Autowired
-    public CourseDAO(EntityManager em) {
+    public CourseDAOHibernate(EntityManager em) {
         this.em = em;
     }
 
     @Override
     public List<Course> findAll() {
-        return em.createQuery("from Course",Course.class).getResultList();
+        Session session = em.unwrap(Session.class);
+        return session.createQuery("from Course", Course.class).getResultList();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CourseDAO implements ICourseDAO<Course> {
     }
 
     @Override
-    public Course save(Course course) {
+    public Course save(Course object) {
         return null;
     }
 
@@ -38,7 +38,7 @@ public class CourseDAO implements ICourseDAO<Course> {
     }
 
     @Override
-    public Course update(Course course) {
+    public Course update(Course object) {
         return null;
     }
 }
