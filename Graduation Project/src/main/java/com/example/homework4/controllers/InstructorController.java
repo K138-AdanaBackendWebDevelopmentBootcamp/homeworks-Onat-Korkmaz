@@ -10,47 +10,53 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("instructors")
 @RestController
 @RequiredArgsConstructor
 public class InstructorController {
 
-    private final InstructorService is;
+    private final InstructorService instructorService;
 
-    @GetMapping("/instructors")
+    @GetMapping
     public ResponseEntity<List<Instructor>> getAllInstructors() {
-        return new ResponseEntity<>(is.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(instructorService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/instructors/{id}")
+    @GetMapping("/{id}")
     public Instructor getinstructorById(@PathVariable Long id) {
-        return is.findById(id);
+        return instructorService.findById(id);
     }
 
-    @PostMapping("/instructors")
+    @PostMapping
     public ResponseEntity<Instructor> saveInstructor(@RequestBody Instructor instructor) {
-        return new ResponseEntity<>(is.save(instructor),HttpStatus.OK);
+        return new ResponseEntity<>(instructorService.save(instructor),HttpStatus.OK);
     }
 
-    @PutMapping("/instructors")
+    @PutMapping
     public ResponseEntity<Instructor> updateInstructor(@RequestBody Instructor instructor) {
-        return new ResponseEntity<>(is.update(instructor),HttpStatus.OK);
+        return new ResponseEntity<>(instructorService.update(instructor),HttpStatus.OK);
     }
 
-    @DeleteMapping("/instructors/{id}")
+    @DeleteMapping("/{id}")
     public String deleteInstructorById(@PathVariable Long id) {
-        is.deleteById(id);
+        instructorService.deleteById(id);
         return "Deleted...";
     }
 
-    @GetMapping("/instructors/name")
+    @GetMapping("/name")
     public ResponseEntity<Instructor> getInstructorByName(@RequestParam String name) {
-        Instructor instructor = is.findByName(name);
+        Instructor instructor = instructorService.findByName(name);
         return new ResponseEntity<>(instructor, HttpStatus.OK);
     }
 
-    @DeleteMapping("/instructors/name/{name}")
+    @DeleteMapping("/name/{name}")
     public String deleteInstructorByName(@PathVariable String name) {
-        is.deleteByName(name);
+        instructorService.deleteByName(name);
         return "Deleted...";
+    }
+
+    @GetMapping("/topThreeSalaryInstructor")
+    public ResponseEntity<List<Instructor>> getTopThreeSalaryInstructor(){
+        return ResponseEntity.ok(instructorService.topThreeSalaryInstructor());
     }
 }

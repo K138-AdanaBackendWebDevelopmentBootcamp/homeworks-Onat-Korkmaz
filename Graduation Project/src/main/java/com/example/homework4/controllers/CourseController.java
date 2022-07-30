@@ -9,47 +9,48 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("course") // RequestMapping kullanabilirsin belirli bir endpoint üstünde bir şeyler yazacaksan, diğer Controllerlara yazmaya üşendim notları aynı şeyler geçerli :D
 @RestController
 @RequiredArgsConstructor
 public class CourseController {
 
-    private final CourseService cs;
-
-    @GetMapping("/courses")
+    private final CourseService courseService; // hiçbir şeyi kısaltarak kullanma olduğu gibi kullan, ileride daha büyük projelerinde kafa karışıklığına yol açabilir
+                                                // bu haliyle daha okunabilir olur başkaları da kodunu okuyacaktır benim gibi
+    @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
-        return new ResponseEntity<>(cs.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(courseService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/courses/id/{id}")
+    @GetMapping("/id/{id}")
     public Course getCourseById(@PathVariable Long id) {
-        return cs.findById(id);
+        return courseService.findById(id);
     }
 
-    @GetMapping("/courses/name")
+    @GetMapping("/name") // ekstradan name olarak belirtmeye gerek yok
     public ResponseEntity<Course> getCourseByName(@RequestParam String name) {
-        Course course = cs.findByName(name);
+        Course course = courseService.findByName(name);
         return new ResponseEntity<>(course, HttpStatus.OK);
     }
 
-    @PostMapping("/courses")
+    @PostMapping
     public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
-        return new ResponseEntity<>(cs.save(course),HttpStatus.OK);
+        return new ResponseEntity<>(courseService.save(course),HttpStatus.OK);
     }
 
-    @PutMapping("/courses")
+    @PutMapping
     public ResponseEntity<Course> updateCourse(@RequestBody Course course) {
-        return new ResponseEntity<>(cs.update(course),HttpStatus.OK);
+        return new ResponseEntity<>(courseService.update(course),HttpStatus.OK);
     }
 
-    @DeleteMapping("/courses/{id}")
+    @DeleteMapping("/{id}")
     public String deleteCourseById(@PathVariable Long id) {
-        cs.deleteById(id);
+        courseService.deleteById(id);
         return "Deleted...";
     }
 
-    @DeleteMapping("/courses/name/{name}")
+    @DeleteMapping("/name/{name}")
     public String deleteCourseByName(@PathVariable String name) {
-        cs.deleteByName(name);
+        courseService.deleteByName(name);
         return "Deleted...";
     }
 }

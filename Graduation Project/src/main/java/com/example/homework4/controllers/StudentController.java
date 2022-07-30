@@ -1,6 +1,5 @@
 package com.example.homework4.controllers;
 
-import com.example.homework4.models.Instructor;
 import com.example.homework4.models.Student;
 import com.example.homework4.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -10,47 +9,48 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("students")
 @RestController
 @RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentService ss;
+    private final StudentService studentService;
 
-    @GetMapping("/students")
+    @GetMapping("")
     public ResponseEntity<List<Student>> getAllStudents() {
-        return new ResponseEntity<>(ss.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/{id}")
     public Student getStudentById(@PathVariable Long id) {
-        return ss.findById(id);
+        return studentService.findById(id);
     }
 
-    @PostMapping("/students")
+    @PostMapping("")
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
-        return new ResponseEntity<>(ss.save(student),HttpStatus.OK);
+        return new ResponseEntity<>(studentService.save(student),HttpStatus.OK);
     }
 
-    @PutMapping("/students")
+    @PutMapping("")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
-        return new ResponseEntity<>(ss.update(student),HttpStatus.OK);
+        return new ResponseEntity<>(studentService.update(student),HttpStatus.OK);
     }
 
-    @DeleteMapping("/students/{id}")
+    @DeleteMapping("/{id}")
     public String deleteStudentById(@PathVariable Long id) {
-        ss.deleteById(id);
+        studentService.deleteById(id);
         return "Deleted...";
     }
 
-    @GetMapping("/students/name")
+    @GetMapping("/name")
     public ResponseEntity<Student> getStudentByName(@RequestParam String name) {
-        Student student = ss.findByName(name);
+        Student student = studentService.findByName(name);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
-    @DeleteMapping("/students/name/{name}")
+    @DeleteMapping("/name/{name}")
     public String deleteStudentByName(@PathVariable String name) {
-        ss.deleteByName(name);
+        studentService.deleteByName(name);
         return "Deleted...";
     }
 }

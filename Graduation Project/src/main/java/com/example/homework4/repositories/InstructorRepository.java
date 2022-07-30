@@ -4,10 +4,10 @@ import com.example.homework4.models.Instructor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface InstructorRepository extends CrudRepository<Instructor, Long> {
     Instructor findByName(String name);
-    int deleteByName(String name);
+    Iterable<Instructor> findTop3ByOrderBySalaryDesc(); // en çok parayı kazanan 3 eğitmenden birini seçiyor
+
+     void deleteInstructorByName(String name); //bunu arada kırmış olabilirim buna çok takılma :D, ide void dön dedi diye öyle yazdım
 }
