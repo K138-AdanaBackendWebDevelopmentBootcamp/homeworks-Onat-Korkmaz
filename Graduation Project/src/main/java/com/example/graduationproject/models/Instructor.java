@@ -1,12 +1,12 @@
 package com.example.graduationproject.models;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,8 +19,10 @@ public abstract class Instructor {
     private String name;
     private String address;
     private String phoneNo;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "instructor")
+
+    @OneToMany(mappedBy = "instructor",cascade = CascadeType.ALL)
     private List<Course> courses;
     @Setter(AccessLevel.PROTECTED)
     private double salary;
+
 }
