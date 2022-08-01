@@ -1,11 +1,17 @@
 package com.example.graduationproject.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +25,8 @@ public class Student {
     private LocalDate birthDate;
     private String address;
     private String gender;
-    @ManyToMany(targetEntity = Student.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @JsonBackReference
+    @ManyToMany(mappedBy = "students")
     private List<Course> courseList;
 }

@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class InitializerRunner implements CommandLineRunner {
         course1.setCode(101);
         course1.setCreditScore(8);
 
-        Course course2 = new Course();
+        Course course2 =  new Course();
         course2.setName("CS");
         course2.setCode(443);
         course2.setCreditScore(7);
@@ -44,23 +46,26 @@ public class InitializerRunner implements CommandLineRunner {
         course3.setCode(102);
         course3.setCreditScore(9);
 
+
         VisitingInstructor instructor1 = new VisitingInstructor();
         instructor1.setName("Oktay Sinanoğlu");
         instructor1.setAddress("İstanbul");
         instructor1.setHourlySalary(30);
         instructor1.setPhoneNo("5051234567");
 
+
         PermanentInstructor instructor2 = new PermanentInstructor();
         instructor2.setName("David Davenport");
         instructor2.setAddress("Ankara");
-        instructor2.setFixedSalary(25);
+        instructor2.setFixedSalary(2500);
         instructor2.setPhoneNo("5351234567");
 
         PermanentInstructor instructor3 = new PermanentInstructor();
         instructor3.setName("Albert Einstein");
         instructor3.setAddress("Munich");
-        instructor3.setFixedSalary(40);
+        instructor3.setFixedSalary(4000);
         instructor3.setPhoneNo("9786452123");
+
 
         Student student1 = new Student();
         student1.setName("Onat Korkmaz");
@@ -113,6 +118,8 @@ public class InitializerRunner implements CommandLineRunner {
         List<Student> studentList3 = new ArrayList<>();
 
         courseList1.add(course1);
+        courseList1.add(course2);
+        courseList1.add(course3);
         courseList2.add(course2);
         courseList3.add(course3);
         courseList4.add(course1);
@@ -124,8 +131,12 @@ public class InitializerRunner implements CommandLineRunner {
 
         studentList1.add(student1);
         studentList1.add(student2);
+        studentList1.add(student3);
+        studentList1.add(student4);
         studentList2.add(student3);
+        studentList2.add(student1);
         studentList2.add(student4);
+        studentList2.add(student6);
         studentList3.add(student5);
         studentList3.add(student6);
 
@@ -145,9 +156,11 @@ public class InitializerRunner implements CommandLineRunner {
         student5.setCourseList(courseList8);
         student6.setCourseList(courseList9);
 
+
         courseRepository.save(course1);
         courseRepository.save(course2);
         courseRepository.save(course3);
+
 
         instructorRepository.save(instructor1);
         instructorRepository.save(instructor2);

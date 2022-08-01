@@ -1,10 +1,6 @@
 package com.example.graduationproject.models;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,8 +15,10 @@ public abstract class Instructor {
     private String name;
     private String address;
     private String phoneNo;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "instructor")
+
+    @OneToMany(mappedBy = "instructor",cascade = CascadeType.ALL)
     private List<Course> courses;
     @Setter(AccessLevel.PROTECTED)
     private double salary;
+
 }

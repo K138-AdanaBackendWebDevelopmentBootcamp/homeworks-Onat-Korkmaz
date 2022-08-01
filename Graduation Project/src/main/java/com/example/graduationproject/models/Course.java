@@ -1,6 +1,7 @@
 package com.example.graduationproject.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,9 +18,18 @@ public class Course {
     private String name;
     private int code;
     private int creditScore;
-    @ManyToMany
+
+    @JsonBackReference
+    @ManyToMany// https://www.baeldung.com/hibernate-many-to-many
+    @JoinTable(
+            name = "course_students",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<Student> students;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @JsonBackReference
+    @ManyToOne
     private Instructor instructor;
 }
